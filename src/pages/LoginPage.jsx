@@ -3,7 +3,7 @@ import { set, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 
-export default function RegisterPage(){
+export default function LoginPage(){
       
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
