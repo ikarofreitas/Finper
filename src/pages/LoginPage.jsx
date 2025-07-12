@@ -23,7 +23,7 @@ export default function LoginPage(){
     const onSubmitHandle = (event) =>  {
         event.preventDefault();
         if (!email || !password) {
-            setError('preenche ai bro');
+            setError('preencha os campos');
         } else {
             console.log ('data sent ', {email, password});
             setError('');
