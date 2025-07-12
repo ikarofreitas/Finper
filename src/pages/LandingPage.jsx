@@ -291,11 +291,13 @@ export default function LandingPage() {
         className="bg-white text-green-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors cursor-pointer">
           Criar conta gratuita
         </button>
-        <a href="/login">
-        <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors cursor-pointer">
+        
+        <button
+        onClick={() => navigate('/login')} 
+        className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors cursor-pointer">
           Fazer login
         </button>
-        </a>
+        
       </div>
     </div>
   </section>
