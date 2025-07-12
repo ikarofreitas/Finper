@@ -1,6 +1,12 @@
 import { FiArrowRight as ArrowRight, FiTrendingUp as TrendingUp, FiShield as Shield, FiSmartphone as Smartphone, FiPieChart as PieChart, FiStar as Star } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function LandingPage() {
+
+  const navigate = useNavigate();
+
   return (
     <div>
     <section className="relative overflow-hidden bg-gradient-to-br from-green-50 to-white">
@@ -21,7 +27,9 @@ export default function LandingPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 flex items-center justify-center space-x-2 cursor-pointer">
+            <button
+            onClick={() => navigate('/register')}
+            className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 flex items-center justify-center space-x-2 cursor-pointer">
               <span>Comece agora</span>
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -277,12 +285,16 @@ export default function LandingPage() {
         Junte-se a milhares de pessoas que já transformaram sua vida financeira
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/register">
         <button className="bg-white text-green-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors cursor-pointer">
           Criar conta gratuita
         </button>
+        </a>
+        <a href="/login">
         <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors cursor-pointer">
           Fazer login
         </button>
+        </a>
       </div>
     </div>
   </section>

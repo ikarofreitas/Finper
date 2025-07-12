@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { FiPieChart as PieChart, FiMenu as Menu, FiX as X } from 'react-icons/fi';
+import { useNavigate, useLocation } from "react-router-dom";
+import { FiPieChart as PieChart, FiMenu as Menu, FiX as X, FiUser as User } from 'react-icons/fi';
 
 export default function Nav(){
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Verifica se está na página Dashboard
+    const isDashboard = location.pathname === '/dashboard';
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -25,51 +31,73 @@ export default function Nav(){
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center space-x-2">
-                <a href="/">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
+              <div 
+                onClick={() => navigate('/')}
+                className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center cursor-pointer"
+              >
                 <PieChart className="w-6 h-6 text-white" />
               </div>
-              </a>
-              <a href="/">
-              <span className="text-xl font-bold text-gray-900 cursor-default cursor-pointer">FinanceApp</span>
-              </a>
+              <span 
+                onClick={() => navigate('/')}
+                className="text-xl font-bold text-gray-900 cursor-pointer"
+              >
+                FinanceApp
+              </span>
             </div>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-8">
-              <button 
-                onClick={() => scrollToSection('features')}
-                className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
-              >
-                Recursos
-              </button>
-              <button 
-                onClick={() => scrollToSection('testimonials')}
-                className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
-              >
-                Depoimentos
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
-              >
-                Contato
-              </button>
-            </div>
+            {/* Desktop Menu - Mostra apenas se não estiver no Dashboard */}
+            {!isDashboard && (
+              <div className="hidden md:flex items-center space-x-8">
+                <button 
+                  onClick={() => scrollToSection('features')}
+                  className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
+                >
+                  Recursos
+                </button>
+                <button 
+                  onClick={() => scrollToSection('testimonials')}
+                  className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
+                >
+                  Depoimentos
+                </button>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-gray-600 hover:text-green-600 transition-colors cursor-pointer"
+                >
+                  Contato
+                </button>
+              </div>
+            )}
 
-            {/* Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4 gap-3">
-                <a href="/login">
-              <button className="text-gray-600 hover:text-green-600 transition-colors font-medium cursor-pointer">
-                Login
-              </button>
-              </a>
-              <a href="/cadastro">
-              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer">
-                Cadastro
-              </button>
-              </a>
-            </div>
+            {/* Auth Buttons - Mostra apenas se não estiver no Dashboard */}
+            {!isDashboard && (
+              <div className="hidden md:flex items-center space-x-4 gap-3">
+                <button 
+                  onClick={() => navigate('/login')}
+                  className="text-gray-600 hover:text-green-600 transition-colors font-medium cursor-pointer"
+                >
+                  Login
+                </button>
+                <button 
+                  onClick={() => navigate('/register')}
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer"
+                >
+                  Cadastro
+                </button>
+              </div>
+            )}
+
+            {/* User Profile - Mostra apenas se estiver no Dashboard */}
+            {isDashboard && (
+              <div className="hidden md:flex items-center space-x-4">
+                <div className="flex items-center space-x-3">
+                  <span className="text-sm text-gray-600 cursor-default">Olá, Usuário</span>
+                  <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-500 transition-colors">
+                    <User className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Mobile menu button */}
             <button
@@ -84,32 +112,53 @@ export default function Nav(){
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t border-gray-100">
               <div className="flex flex-col space-y-4">
-                <button 
-                  onClick={() => scrollToSection('features')}
-                  className="text-gray-600 hover:text-green-600 transition-colors text-left"
-                >
-                  Recursos
-                </button>
-                <button 
-                  onClick={() => scrollToSection('testimonials')}
-                  className="text-gray-600 hover:text-green-600 transition-colors text-left"
-                >
-                  Depoimentos
-                </button>
-                <button 
-                  onClick={() => scrollToSection('contact')}
-                  className="text-gray-600 hover:text-green-600 transition-colors text-left"
-                >
-                  Contato
-                </button>
-                <div className="flex flex-col space-y-2 pt-4 border-t border-gray-100">
-                  <button className="text-gray-600 hover:text-green-600 transition-colors font-medium text-left">
-                    Login
-                  </button>
-                  <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors w-fit">
-                    Cadastro
-                  </button>
-                </div>
+                {/* Menu para páginas normais */}
+                {!isDashboard && (
+                  <>
+                    <button 
+                      onClick={() => scrollToSection('features')}
+                      className="text-gray-600 hover:text-green-600 transition-colors text-left"
+                    >
+                      Recursos
+                    </button>
+                    <button 
+                      onClick={() => scrollToSection('testimonials')}
+                      className="text-gray-600 hover:text-green-600 transition-colors text-left"
+                    >
+                      Depoimentos
+                    </button>
+                    <button 
+                      onClick={() => scrollToSection('contact')}
+                      className="text-gray-600 hover:text-green-600 transition-colors text-left"
+                    >
+                      Contato
+                    </button>
+                    <div className="flex flex-col space-y-2 pt-4 border-t border-gray-100">
+                      <button 
+                        onClick={() => navigate('/login')}
+                        className="text-gray-600 hover:text-green-600 transition-colors font-medium text-left"
+                      >
+                        Login
+                      </button>
+                      <button 
+                        onClick={() => navigate('/register')}
+                        className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-colors w-fit"
+                      >
+                        Cadastro
+                      </button>
+                    </div>
+                  </>
+                )}
+                
+                {/* Menu para Dashboard */}
+                {isDashboard && (
+                  <div className="flex items-center space-x-3 py-2">
+                    <span className="text-sm text-gray-600">Olá, Usuário</span>
+                    <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                      <User className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}

@@ -10,6 +10,8 @@ export default function RegisterPage(){
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    
+    console.log('RegisterPage carregada, navigate function:', navigate);
 
     const onChangeHandle = (event) => {
         const {name,value} = event.target;
@@ -26,15 +28,20 @@ export default function RegisterPage(){
     }
     const onSubmitHandle = (event) =>  {
         event.preventDefault();
+        console.log('Formulário submetido!');
+        console.log('Valores:', { fullname, email, password });
+        
         if (!fullname || !email || !password) {
             setError('preencha os campos');
+            console.log('Erro: campos vazios');
         } else {
-            console.log ('data sent ', {fullname, email, password});
+            console.log('Dados enviados:', {fullname, email, password});
             setError('');
             setFullname('');
             setEmail('');
             setPassword('');
-            navigate('/login');
+            console.log('Redirecionando para /dashboard...');
+            navigate('/dashboard');
         }
     }
     return(
@@ -82,15 +89,16 @@ export default function RegisterPage(){
                     <button 
                         className="bg-green-700 hover:bg-green-800 transition-colors rounded-sm px-5 py-2 text-white text-center cursor-pointer"
                         type="submit"
-                        >Cadastrar-se</button>
+                        >Cadastrar-se
+                        </button>
 
-                    <p className="text-center text-sm"
+                    <p className="text-center text-sm cursor-default"
                     >Já tem uma conta?</p>
                     <button 
                         type="button"
                         className="font-bold text-green-700 cursor-pointer hover:text-green-800"
                         onClick={() => navigate('/login')}
-                        >   faça login
+                        >   Faça login
                     </button>
                     {error && <p className="text-center text-red-600">Preencha todos os campos antes de continuar!</p>}
         

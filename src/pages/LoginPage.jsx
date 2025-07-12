@@ -29,7 +29,7 @@ export default function LoginPage(){
             setError('');
             setEmail('');
             setPassword('');
-            navigate('/');
+            navigate('/dashboard');
         }
     }
     return(
@@ -68,7 +68,8 @@ export default function LoginPage(){
                     <button 
                         className="bg-green-700 hover:bg-green-800 transition-colors rounded-sm px-5 py-2 text-white text-center cursor-pointer"
                         type="submit"
-                        >entrar</button>
+                        >Entrar
+                    </button>
 
                     <p className="text-center text-sm"
                 >   Não tem uma conta?</p>
