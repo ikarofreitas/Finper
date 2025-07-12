@@ -1,12 +1,30 @@
-# React + Vite
+🎯 Finper
+Finper é uma ferramenta financeira focada em análise e projeção de dados pessoais, oferecendo funcionalidades práticas para controle, visualização e previsão de gastos, receitas e investimentos.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Recursos principais
+📊 Dashboards interativos para monitoramento de despesas, receitas e saldo.
 
-Currently, two official plugins are available:
+📈 Gráficos e relatórios personalizados por categoria, período e metas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔮 Projeções e previsões usando métodos preditivos (ex: médias móveis, regressão, IA).
 
-## Expanding the ESLint configuration
+🔗 Importação de dados de diferentes formatos (CSV, Excel, APIs bancárias).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📅 Planejamento financeiro, com definição de objetivos (viagem, emergência, aposentadoria).
+
+✅ Alertas e notificações para limites de gastos, projeções de orçamento estourando etc.
+
+💾 Persistência local com SQLite/PostgreSQL ou exportação para CSV/JSON.
+
+🛠️ Tecnologias utilizadas
+
+Frontend com React, Vue.js ou Svelte, plus Chart.js ou D3.js.
+Back-End com Nodejs (Express), Prisma, MongoDB
+Autenticação via JWT
+
+📄 Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais informações.
+
+💬 Contato
+Feito por Íkaro Freitas e José Guilherme. Para dúvidas e sugestões, abra uma issue ou entre em contato via LinkedIn/GitHub.
+
