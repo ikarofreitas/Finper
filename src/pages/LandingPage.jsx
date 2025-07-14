@@ -8,7 +8,7 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="opacity-0 animate-[fadeIn_0.9s_ease-out_forwards]">
     <section className="relative overflow-hidden bg-gradient-to-br from-green-50 to-white">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

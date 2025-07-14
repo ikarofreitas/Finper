@@ -12,7 +12,7 @@ export default function Footer(){
                 <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
                   <PieChart className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold">FinanceApp</span>
+                <span className="text-xl font-bold">Finper</span>
               </div>
               <p className="text-gray-400">
                 Transformando a forma como você gerencia suas finanças pessoais.

@@ -41,7 +41,7 @@ export default function Nav(){
                 onClick={() => navigate('/')}
                 className="text-xl font-bold text-gray-900 cursor-pointer"
               >
-                FinanceApp
+                Finper
               </span>
             </div>
 
