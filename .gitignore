@@ -9,7 +9,7 @@ build/
 .env
 *.env
 back-end/.env
-
+.idea
 
 # Ignorar logs
 npm-debug.log*
