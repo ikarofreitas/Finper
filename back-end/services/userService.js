@@ -1,0 +1,16 @@
+import bcrypt from "bcrypt";
+import { prisma } from "../lib/prisma.js";
+
+export async function createUser(data) {
+    const existingUser = await prisma.user.findUnique({ where: { email: data.email } });
+    if (existingUser) throw new Error("E-mail já cadastrado");
+
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    return prisma.user.create({
+        data: { ...data, password: hashedPassword },
+    });
+}
+
+export async function findUserByEmail(email) {
+    return prisma.user.findUnique({ where: { email } });
+}
