@@ -24,6 +24,7 @@ export async function login(req, res) {
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
         res.json({ token });
     } catch (error) {
+        console.error('Erro no login:', error);
         res.status(500).json({ message: "Erro interno" });
     }
 }
