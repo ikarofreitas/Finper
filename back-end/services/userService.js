@@ -7,7 +7,11 @@ export async function createUser(data) {
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
     return prisma.user.create({
-        data: { ...data, password: hashedPassword },
+        data: {
+            name: data.fullname,   // mapear fullname para name
+            email: data.email,
+            password: hashedPassword,
+        },
     });
 }
 

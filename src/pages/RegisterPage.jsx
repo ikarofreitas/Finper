@@ -26,7 +26,7 @@ export default function RegisterPage(){
         }
 
     }
-    const onSubmitHandle = (event) =>  {
+    const onSubmitHandle = async (event) =>  {
         event.preventDefault();
         console.log('Formulário submetido!');
         console.log('Valores:', { fullname, email, password });
@@ -34,16 +34,30 @@ export default function RegisterPage(){
         if (!fullname || !email || !password) {
             setError('preencha os campos');
             console.log('Erro: campos vazios');
-        } else {
-            console.log('Dados enviados:', {fullname, email, password});
-            setError('');
-            setFullname('');
-            setEmail('');
-            setPassword('');
-            console.log('Redirecionando para /dashboard...');
-            navigate('/dashboard');
-        }
+            return;
+        } 
+
+        try {
+      setError('');
+
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullname, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Erro ao registrar');
+      }
+      alert('conta criada com sucesso!');
+      navigate('/login');
+
+    } catch (err) {
+      setError(err.message || 'Erro interno');
     }
+  };
     return(
         <>
         <div className="bg-green-200 p-5">
@@ -100,7 +114,7 @@ export default function RegisterPage(){
                         onClick={() => navigate('/login')}
                         >   Faça login
                     </button>
-                    {error && <p className="text-center text-red-600">Preencha todos os campos antes de continuar!</p>}
+                    {error && <p className="text-center text-red-600">{error}</p>}
         
                 </form>    
             </div>

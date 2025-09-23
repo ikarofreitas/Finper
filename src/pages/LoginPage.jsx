@@ -1,6 +1,7 @@
-import { useState, useEffect, Fragment } from "react";
-import { set, useForm } from "react-hook-form";
+import { useState } from "react";
+//import { set, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 export default function LoginPage(){
@@ -20,18 +21,31 @@ export default function LoginPage(){
         }
 
     }
-    const onSubmitHandle = (event) =>  {
-        event.preventDefault();
-        if (!email || !password) {
-            setError('preencha os campos');
-        } else {
-            console.log ('data sent ', {email, password});
-            setError('');
-            setEmail('');
-            setPassword('');
-            navigate('/dashboard');
-        }
+    const onSubmitHandle = async (event) =>  {
+    event.preventDefault();
+    if (!email || !password) {
+        setError('preencha os campos');
+        return;
     }
+
+    try {
+
+        const res = await axios.post("http://localhost:3000/login", {
+            email,
+            password
+        });
+
+        localStorage.setItem("token", res.data.token);
+
+        setError('');
+        setEmail('');
+        setPassword('');
+        navigate('/dashboard');
+    } catch (err) {
+        console.error(err);
+        setError('Email ou senha inválidos');
+    }
+};
     return(
         <>
         <div className="bg-green-200 p-5">
@@ -79,7 +93,7 @@ export default function LoginPage(){
                         onClick={() => navigate('/register')}
                         >Cadastrar-se
                     </button>
-                    {error && <p className="text-center text-red-600">Preencha todos os campos antes de continuar!</p>}
+                    {error && <p className="text-center text-red-600">{error}</p>}
         
                 </form>    
             </div>
