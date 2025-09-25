@@ -34,8 +34,11 @@ export default function LoginPage(){
             email,
             password
         });
+        console.log("Resposta do login:", res.data);
 
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.location.href = "/dashboard";
 
         setError('');
         setEmail('');

@@ -18,3 +18,14 @@ export async function createUser(data) {
 export async function findUserByEmail(email) {
     return prisma.user.findUnique({ where: { email } });
 }
+
+
+export async function getAllUsers(){
+    return await prisma.user.findMany();
+}
+
+export async function deleteUser(id) {
+    return await prisma.user.delete({
+        where: { id }
+    });
+}

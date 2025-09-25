@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FiPieChart as PieChart, FiMenu as Menu, FiX as X, FiUser as User } from 'react-icons/fi';
 
@@ -22,6 +22,24 @@ export default function Nav(){
         }
         setIsMenuOpen(false);
       };
+
+    const [userName, setUserName] = useState("Usuário");
+
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        if (user) {
+            setUserName(JSON.parse(user).name);
+        } else {
+            setUserName("");
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setUserName("");
+        navigate("/login");
+    };
 
     return(
         <div className="bg-white">
@@ -88,16 +106,22 @@ export default function Nav(){
             )}
 
             {/* User Profile - Mostra apenas se estiver no Dashboard */}
-            {isDashboard && (
-              <div className="hidden md:flex items-center space-x-4">
-                <div className="flex items-center space-x-3">
-                  <span className="text-sm text-gray-600 cursor-default">Olá, Usuário</span>
-                  <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-500 transition-colors">
-                    <User className="w-4 h-4 text-white" />
+              {isDashboard && userName && (
+                  <div className="hidden md:flex items-center space-x-4">
+                      <div className="flex items-center space-x-3">
+                          <span className="text-sm text-gray-600 cursor-default">Olá, {userName || "Usuário"}</span>
+                          <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center cursor-pointer hover:bg-green-500 transition-colors">
+                              <User className="w-4 h-4 text-white" />
+                          </div>
+                      </div>
+                      <button
+                          onClick={handleLogout}
+                          className="bg-red-600 hover:bg-red-700 transition delay-150 duration-300 ease-in-out hover:scale-110 text-white px-4 py-1 rounded transition-colors text-sm cursor-pointer"
+                      >
+                          Sair
+                      </button>
                   </div>
-                </div>
-              </div>
-            )}
+              )}
 
             {/* Mobile menu button */}
             <button
@@ -153,7 +177,7 @@ export default function Nav(){
                 {/* Menu para Dashboard */}
                 {isDashboard && (
                   <div className="flex items-center space-x-3 py-2">
-                    <span className="text-sm text-gray-600">Olá, Usuário</span>
+                    <span className="text-sm text-gray-600">Olá, {userName}</span>
                     <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center">
                       <User className="w-4 h-4 text-white" />
                     </div>

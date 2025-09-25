@@ -22,9 +22,38 @@ export async function login(req, res) {
         if (!isValid) return res.status(401).json({ message: "Senha inválida" });
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-        res.json({ token });
+        res.json({
+            token,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        });
     } catch (error) {
         console.error('Erro no login:', error);
         res.status(500).json({ message: "Erro interno" });
     }
+}
+
+export async function getAllUsers(req, res) {
+    try {
+        const users = await userService.getAllUsers();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export async function deleteUser(req, res) {
+    try {
+        const id = req.params.id
+        await userService.deleteUser(id);
+        res.status(200).json({
+            message: 'usuário deletado com sucesso'
+        })
+    }catch(error) {
+        res.status(500).json({ message: error.message });
+    }
+
 }
